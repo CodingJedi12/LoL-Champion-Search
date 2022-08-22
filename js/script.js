@@ -22,6 +22,15 @@ const $input = $('input[type="text"]')
 //attaches jquery var to img tag
 const $img = $('#champ-image')
 
+//attaches jquery var to ally tag
+const $ally = $('#ally-tips')
+
+//attaches jquery var to enemy tag
+const $enemy = $('#enemy-tips')
+
+//attaches jquery var to tags tag
+const $tags = $('#tags')
+
 //////////////////
 //EVENT LISTENERS
 //////////////////
@@ -74,7 +83,16 @@ function render(champData) {
     $title.text(champData.data[userChamp].title);
     
     //fills the text attached to $lore with the data received at data point, lore
-    $lore.text(champData.data[userChamp].lore);
+    $lore.text(`Lore: ${champData.data[userChamp].lore}`);
+
+    //fills the text attached to $ally with the data received at the data point, allytips
+    $ally.text(`Ally Tips: ${champData.data[userChamp].allytips}`)
+
+    //fills the text attached to $enemy with the data received at the data point, enemytips
+    $enemy.text(`Enemy Tips: ${champData.data[userChamp].enemytips}`)
+
+    //fills the text attached to $enemy with the data received at the data point, enemytips
+    $tags.text(`Roles: ${champData.data[userChamp].tags}`)
     
     //pulls img from url
     $img.attr('src', `http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/${userChamp}.png` )
