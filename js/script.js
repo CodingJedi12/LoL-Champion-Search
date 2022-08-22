@@ -42,6 +42,10 @@ function handleGetData(e) {
     const champSpecificURL = 'https://ddragon.leagueoflegends.com/cdn/12.15.1/data/en_US/champion/' + userChamp + '.json';
     //console.log(champSpecificURL);
 
+    const imageURL = `http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/` + userChamp + `.png`;
+    // console.log(imageURL)
+
+    $('img').remove();
 
     $.ajax({
         url: champSpecificURL //ajax call to url created
@@ -53,6 +57,17 @@ function handleGetData(e) {
             console.log('bad request', error); //if error occurs, console.logs the error
         }
     );
+    $.ajax({
+        url: imageURL //ajax call to url
+    }).then (
+        (data) => {
+            renderTwo(data);
+        },
+        (error) => {
+            console.log('bad request', error); //if error occurs, console.logs the error
+        }
+    )
+    $input.val('');
 }
 
 function render(champData) {
@@ -66,4 +81,18 @@ function render(champData) {
 
     //fills the text attached to $lore with the data received at data point, lore
     $lore.text(champData.data[userChamp].lore);
+
+    // console.log(champData.data[userChamp].image.full);
 }
+function renderTwo(data) {
+    const imageURL = `http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/` + userChamp + `.png`;
+    //console.log(imageURL)
+    $('main').prepend(`<img src="${imageURL}"/>`);
+}
+
+
+//Need to pull a blurb that funnels into the lore when clicked
+//Need to pull ally tips
+//Need to pull enemy tips
+//Need to pull tags
+//Need to pull info
