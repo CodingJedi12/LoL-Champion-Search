@@ -55,11 +55,11 @@ function handleGetData(e) {
     
     //concatenates the champion selected with the url to retrieve the correct object
     const champSpecificURL = 'https://ddragon.leagueoflegends.com/cdn/12.15.1/data/en_US/champion/' + userChamp + '.json';
-    //console.log(champSpecificURL);
+    console.log(champSpecificURL);
 
     //concatenates the champion selected with the url to retrieve the img file
     const imageURL = `http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/` + userChamp + `.png`;
-    // console.log(imageURL)
+    console.log(imageURL)
     $.ajax({
         url: champSpecificURL //ajax call to url created
     }).then(
@@ -95,7 +95,7 @@ function render(champData) {
     $tags.text(`Roles: ${champData.data[userChamp].tags}`)
     
     //pulls img from url
-    $img.attr('src', `http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/${userChamp}.png` )
+    $img.attr('src', `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${userChamp}_0.jpg` )
     
     //resets input box to empty
     $input.val('');
@@ -119,7 +119,4 @@ function capitalize(userChamp) {
 
 
 //Need to pull a blurb that funnels into the lore when clicked
-//Need to pull ally tips
-//Need to pull enemy tips
-//Need to pull tags
 //Need to pull info
