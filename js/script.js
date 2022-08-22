@@ -48,7 +48,7 @@ function handleGetData(e) {
     e.preventDefault(); 
     
     //applies the value placed in the text box to the variable userChamp
-    userChamp = $input.val();
+    userChamp = $input.val().toLowerCase();
 
     //Capitalizes userChamp and if it is multiple elements, joins them together
     userChamp = capitalize(userChamp);
