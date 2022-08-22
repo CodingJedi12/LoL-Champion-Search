@@ -19,6 +19,9 @@ const $lore = $('#lore');
 //attaches jQuery var to the input text box
 const $input = $('input[type="text"]')
 
+//attaches jquery var to img tag
+const $img = $('#champ-image')
+
 //////////////////
 //EVENT LISTENERS
 //////////////////
@@ -45,11 +48,9 @@ function handleGetData(e) {
     const champSpecificURL = 'https://ddragon.leagueoflegends.com/cdn/12.15.1/data/en_US/champion/' + userChamp + '.json';
     //console.log(champSpecificURL);
 
+    //concatenates the champion selected with the url to retrieve the img file
     const imageURL = `http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/` + userChamp + `.png`;
     // console.log(imageURL)
-
-    $('img').remove();
-
     $.ajax({
         url: champSpecificURL //ajax call to url created
     }).then(
@@ -59,39 +60,27 @@ function handleGetData(e) {
         (error) => {
             console.log('bad request', error); //if error occurs, console.logs the error
         }
-    );
-    $.ajax({
-        url: imageURL //ajax call to url
-    }).then (
-        (data) => {
-            renderTwo(data);
-        },
-        (error) => {
-            console.log('bad request', error); //if error occurs, console.logs the error
-        }
-    )
-    $input.val('');
+    );    
 }
 
-
+//renders the champData to the HTML
 function render(champData) {
     //console.log('doing something'); //tests to see if render function is running
-
+    
     //fills the text attached to $name with the data received at data point, id
-    $name.text(champData.data[userChamp].id);
-
+    $name.text(champData.data[userChamp].name);
+    
     //fills the text attached to $title with the data received at data point, title
     $title.text(champData.data[userChamp].title);
-
+    
     //fills the text attached to $lore with the data received at data point, lore
     $lore.text(champData.data[userChamp].lore);
-
-    // console.log(champData.data[userChamp].image.full);
-}
-function renderTwo(data) {
-    const imageURL = `http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/` + userChamp + `.png`;
-    //console.log(imageURL)
-    $('main').prepend(`<img src="${imageURL}"/>`);
+    
+    //pulls img from url
+    $img.attr('src', `http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/${userChamp}.png` )
+    
+    //resets input box to empty
+    $input.val('');
 }
 
 //capitalizes input value
