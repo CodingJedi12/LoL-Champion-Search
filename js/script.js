@@ -38,6 +38,9 @@ function handleGetData(e) {
     //applies the value placed in the text box to the variable userChamp
     userChamp = $input.val();
 
+    //Capitalizes userChamp and if it is multiple elements, joins them together
+    userChamp = capitalize(userChamp);
+    
     //concatenates the champion selected with the url to retrieve the correct object
     const champSpecificURL = 'https://ddragon.leagueoflegends.com/cdn/12.15.1/data/en_US/champion/' + userChamp + '.json';
     //console.log(champSpecificURL);
@@ -70,6 +73,7 @@ function handleGetData(e) {
     $input.val('');
 }
 
+
 function render(champData) {
     //console.log('doing something'); //tests to see if render function is running
 
@@ -88,6 +92,22 @@ function renderTwo(data) {
     const imageURL = `http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/` + userChamp + `.png`;
     //console.log(imageURL)
     $('main').prepend(`<img src="${imageURL}"/>`);
+}
+
+//capitalizes input value
+function capitalize(userChamp) {
+    //splits the string into an array of substrings based upon a space
+    let words = userChamp.split(' ');
+    //declares an empty array
+    let capWords = [];
+    //for each element in the string entered, we take the first letter of the element and upper case it, then slice it back in and return the rest of the array behind it
+    words.forEach(element => { 
+        capWords.push(element[0].toUpperCase() + element.slice(1, element.length));
+        
+    });
+    //console.log(capWords.join(''));
+    //return the array made as a joined string
+    return capWords.join('');
 }
 
 
