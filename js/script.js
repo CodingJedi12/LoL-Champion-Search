@@ -101,11 +101,23 @@ function render(champData) {
         $lore.text(`Lore: ${champData.data[userChamp].lore}`);
         
         //fills the text attached to $ally with the data received at the data point, allytips
-        $ally.text(`Ally Tips: ${champData.data[userChamp].allytips.join(" ")}`)
-        
+        if (champData.data[userChamp].allytips.length > 0) {
+            $ally.text(`Ally Tips: ${champData.data[userChamp].allytips.join(" ")}`)
+        }
+        //if no ally tips is available, discard
+        else if (champData.data[userChamp].allytips.length = " ") {
+            $ally.text(' ');
+        }
+
         //fills the text attached to $enemy with the data received at the data point, enemytips
-        $enemy.text(`Enemy Tips: ${champData.data[userChamp].enemytips.join(" ")}`)
-        
+        if (champData.data[userChamp].enemytips.length > 0) {
+            $enemy.text(`Enemy Tips: ${champData.data[userChamp].enemytips.join(" ")}`)
+        }
+        //if no enemy tips is available, discard
+        else if (champData.data[userChamp].enemytips.length = " ") {
+            $enemy.text(' ');
+        }
+
         //fills the text attached to $enemy with the data received at the data point, enemytips
         $tags.text(`Roles: ${champData.data[userChamp].tags.join(", ")}`)
         
