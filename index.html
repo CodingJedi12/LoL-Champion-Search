@@ -8,24 +8,30 @@
     <script defer src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="./js/script.js" defer></script>
     <link rel="stylesheet" href="./css/style.css">
-    <title>Document</title>
+    <title>LoL Search Engine</title>
 </head>
 
 <body>
-    <img src="" id="champ-image"/>
-    <main>
-        <h1 id="name">Name</h1>
-        <h3 id="title">Title:</h3>
-        <p id="lore">Lore: </p>
-        <p id="ally-tips">Ally tips: </p>
-        <p id="enemy-tips">Enemy tips: </p>
-        <p id="tags">Roles: </p>
-    </main>
+    <div id="main-container">
+        <div id="image">
+            <img src="" id="champ-image" />
+            <h1 id="name" class="name"></h1>
+            <h3 id="title" class="name"></h3>
+        </div>
+        <main>
+            <div id="info">
+                <p id="lore"></p>
+                <p id="ally-tips"></p>
+                <p id="enemy-tips"></p>
+                <p id="tags"></p>
+            </div>
+        </main>
 
-    <form>
-        <input type="text" placeholder="Enter Champion"/>
-        <input type="submit" value="Get Champion Info"/>
-    </form>
+        <form>
+            <input type="text" placeholder="Enter Champion" />
+            <input type="submit" value="Get Champion Info" />
+        </form>
+    </div>
 </body>
 
 </html>
