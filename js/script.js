@@ -51,7 +51,7 @@ function handleGetData(e) {
     userChamp = $input.val().toLowerCase();
 
     //Capitalizes userChamp and if it is multiple elements, joins them together
-    userChamp = capitalize(userChamp);
+    userChamp = capitalizeAndAttach(userChamp);
     
     //concatenates the champion selected with the url to retrieve the correct object
     const champSpecificURL = 'https://ddragon.leagueoflegends.com/cdn/12.15.1/data/en_US/champion/' + userChamp + '.json';
@@ -67,7 +67,9 @@ function handleGetData(e) {
             render(champData); //gets data from the object, passes it to the render() function and runs it
         },
         (error) => {
+            alert('Please enter a real champion');//alerts user that they entered something wrong
             console.log('bad request', error); //if error occurs, console.logs the error
+            $input.val('');//resets input value to empty
         }
     );    
 }
@@ -80,19 +82,19 @@ function render(champData) {
     $name.text(champData.data[userChamp].name);
     
     //fills the text attached to $title with the data received at data point, title
-    $title.text(champData.data[userChamp].title);
+    $title.text(capitalizeEachElement(champData.data[userChamp].title));
     
     //fills the text attached to $lore with the data received at data point, lore
     $lore.text(`Lore: ${champData.data[userChamp].lore}`);
 
     //fills the text attached to $ally with the data received at the data point, allytips
-    $ally.text(`Ally Tips: ${champData.data[userChamp].allytips}`)
+    $ally.text(`Ally Tips: ${champData.data[userChamp].allytips.join(" ")}`)
 
     //fills the text attached to $enemy with the data received at the data point, enemytips
-    $enemy.text(`Enemy Tips: ${champData.data[userChamp].enemytips}`)
+    $enemy.text(`Enemy Tips: ${champData.data[userChamp].enemytips.join(" ")}`)
 
     //fills the text attached to $enemy with the data received at the data point, enemytips
-    $tags.text(`Roles: ${champData.data[userChamp].tags}`)
+    $tags.text(`Roles: ${champData.data[userChamp].tags.join(", ")}`)
     
     //pulls img from url
     $img.attr('src', `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${userChamp}_0.jpg` )
@@ -101,8 +103,8 @@ function render(champData) {
     $input.val('');
 }
 
-//capitalizes input value
-function capitalize(userChamp) {
+//capitalizes input value and attaches as one string
+function capitalizeAndAttach(userChamp) {
     //splits the string into an array of substrings based upon a space
     let words = userChamp.split(' ');
     //declares an empty array
@@ -115,6 +117,22 @@ function capitalize(userChamp) {
     //console.log(capWords.join(''));
     //return the array made as a joined string
     return capWords.join('');
+}
+
+//capitalizes each substring 
+function capitalizeEachElement(userChamp) {
+    //splits the string into an array of substrings based upon a space
+    let words = userChamp.split(' ');
+    //declares an empty array
+    let capWords = [];
+    //for each element in the string entered, we take the first letter of the element and upper case it, then slice it back in and return the rest of the array behind it
+    words.forEach(element => { 
+        capWords.push(element[0].toUpperCase() + element.slice(1, element.length));
+        
+    });
+    //console.log(capWords.join(''));
+    //return the array made as a joined string
+    return capWords.join(' ');
 }
 
 
