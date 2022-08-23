@@ -29,3 +29,11 @@ body {
     text-align: center;
     color: black;  
 }
+
+@media screen {
+    body {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    }    
+}
