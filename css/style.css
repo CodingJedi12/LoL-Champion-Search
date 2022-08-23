@@ -26,8 +26,13 @@ body {
 #info {
     background-color: rgba(255, 255, 255, .5);
     border-radius: 10px;
+    padding: 12px;
     text-align: center;
     color: black;  
+}
+
+form {
+    padding-top: 10px;
 }
 
 @media screen {

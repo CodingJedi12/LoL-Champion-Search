@@ -31,12 +31,25 @@ const $enemy = $('#enemy-tips')
 //attaches jquery var to tags tag
 const $tags = $('#tags')
 
+//attaches jquery var to info div
+const $info = $('#info')
+$info.hide();//hides this element
+
+//attaches jquery var to image, name and title div
+const $champ = $('#image')
+$champ.hide();//hides this element
+
+
 //////////////////
 //EVENT LISTENERS
 //////////////////
 
 //targets our form html element. on the event, submit, run function handleGetData()
 $('form').on('submit', handleGetData);
+
+//toggles whether info is showing or not
+$champ.on('click', hideOrReveal);
+
 
 ///////////////////
 /////FUNCTIONS
@@ -49,14 +62,14 @@ function handleGetData(e) {
     
     //applies the value placed in the text box to the variable userChamp
     userChamp = $input.val().toLowerCase();
-
+    
     //Capitalizes userChamp and if it is multiple elements, joins them together
     userChamp = capitalizeAndAttach(userChamp);
     
     //concatenates the champion selected with the url to retrieve the correct object
     const champSpecificURL = 'https://ddragon.leagueoflegends.com/cdn/12.15.1/data/en_US/champion/' + userChamp + '.json';
     console.log(champSpecificURL);
-
+    
     //concatenates the champion selected with the url to retrieve the img file
     const imageURL = `http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/` + userChamp + `.png`;
     console.log(imageURL)
@@ -71,43 +84,47 @@ function handleGetData(e) {
             console.log('bad request', error); //if error occurs, console.logs the error
             $input.val('');//resets input value to empty
         }
-    );    
-}
-
+        );    
+    }
+    
 //renders the champData to the HTML
 function render(champData) {
-    //console.log('doing something'); //tests to see if render function is running
-    
-    //fills the text attached to $name with the data received at data point, id
-    $name.text(champData.data[userChamp].name);
-    
-    //fills the text attached to $title with the data received at data point, title
-    $title.text(capitalizeEachElement(champData.data[userChamp].title));
-    
-    //fills the text attached to $lore with the data received at data point, lore
-    $lore.text(`Lore: ${champData.data[userChamp].lore}`);
-
-    //fills the text attached to $ally with the data received at the data point, allytips
-    $ally.text(`Ally Tips: ${champData.data[userChamp].allytips.join(" ")}`)
-
-    //fills the text attached to $enemy with the data received at the data point, enemytips
-    $enemy.text(`Enemy Tips: ${champData.data[userChamp].enemytips.join(" ")}`)
-
-    //fills the text attached to $enemy with the data received at the data point, enemytips
-    $tags.text(`Roles: ${champData.data[userChamp].tags.join(", ")}`)
-    
-    //pulls img from url
-    $img.attr('src', `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${userChamp}_0.jpg` )
-    
-    //resets input box to empty
-    $input.val('');
-}
+        //console.log('doing something'); //tests to see if render function is running
+        
+        //fills the text attached to $name with the data received at data point, id
+        $name.text(champData.data[userChamp].name);
+        
+        //fills the text attached to $title with the data received at data point, title
+        $title.text(capitalizeEachElement(champData.data[userChamp].title));
+        
+        //fills the text attached to $lore with the data received at data point, lore
+        $lore.text(`Lore: ${champData.data[userChamp].lore}`);
+        
+        //fills the text attached to $ally with the data received at the data point, allytips
+        $ally.text(`Ally Tips: ${champData.data[userChamp].allytips.join(" ")}`)
+        
+        //fills the text attached to $enemy with the data received at the data point, enemytips
+        $enemy.text(`Enemy Tips: ${champData.data[userChamp].enemytips.join(" ")}`)
+        
+        //fills the text attached to $enemy with the data received at the data point, enemytips
+        $tags.text(`Roles: ${champData.data[userChamp].tags.join(", ")}`)
+        
+        //pulls img from url
+        $img.attr('src', `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${userChamp}_0.jpg` )
+        
+        //reveals image div
+        $champ.show();
+        
+        
+        //resets input box to empty
+        $input.val('');
+    }
 
 //capitalizes input value and attaches as one string
 function capitalizeAndAttach(userChamp) {
-    //splits the string into an array of substrings based upon a space
-    let words = userChamp.split(' ');
-    //declares an empty array
+        //splits the string into an array of substrings based upon a space
+        let words = userChamp.split(' ');
+        //declares an empty array
     let capWords = [];
     //for each element in the string entered, we take the first letter of the element and upper case it, then slice it back in and return the rest of the array behind it
     words.forEach(element => { 
@@ -135,6 +152,14 @@ function capitalizeEachElement(userChamp) {
     return capWords.join(' ');
 }
 
+function hideOrReveal () {
+    if ($info.is(':hidden')) {
+        $info.show();
+    }
+    else if ($info.is(':visible')) {
+        $info.hide();
+    }
+}
 
 //Need to pull a blurb that funnels into the lore when clicked
 //Need to pull info
