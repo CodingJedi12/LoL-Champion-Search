@@ -18,8 +18,8 @@ body {
     background-color: black;
     text-align: center;
     color: white;
-    padding-bottom: 1%;
     border-radius: 10px;
+    padding-bottom: 2px;
 }
 
 #image:hover {
