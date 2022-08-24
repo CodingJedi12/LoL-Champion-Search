@@ -68,11 +68,11 @@ function handleGetData(e) {
     
     //concatenates the champion selected with the url to retrieve the correct object
     const champSpecificURL = 'https://ddragon.leagueoflegends.com/cdn/12.15.1/data/en_US/champion/' + userChamp + '.json';
-    console.log(champSpecificURL);
+    
     
     //concatenates the champion selected with the url to retrieve the img file
     const imageURL = `http://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/` + userChamp + `.png`;
-    console.log(imageURL)
+    
     $.ajax({
         url: champSpecificURL //ajax call to url created
     }).then(
@@ -86,7 +86,7 @@ function handleGetData(e) {
         }
         );    
     }
-    
+
 //renders the champData to the HTML
 function render(champData) {
         //console.log('doing something'); //tests to see if render function is running
@@ -164,6 +164,7 @@ function capitalizeEachElement(userChamp) {
     return capWords.join(' ');
 }
 
+//hides or reveals the info about the champ on click
 function hideOrReveal () {
     if ($info.is(':hidden')) {
         $info.show();
@@ -172,6 +173,3 @@ function hideOrReveal () {
         $info.hide();
     }
 }
-
-//Need to pull a blurb that funnels into the lore when clicked
-//Need to pull info
