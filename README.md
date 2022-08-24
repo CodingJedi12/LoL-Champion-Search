@@ -13,7 +13,7 @@ In this project, HTML, CSS, Javacript and JQuery were utilized.
 ## Getting Started
 
 Just click the link below and start searching!
-(link to deployed app)
+[here](https://fabulous-moxie-32bc2f.netlify.app/)
 
 ## Future Enhancements
 
