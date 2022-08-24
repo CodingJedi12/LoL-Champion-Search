@@ -8,7 +8,7 @@ In this project, HTML, CSS, Javacript and JQuery were utilized.
 
 ## Screenshot
 
-[Imgur](https://i.imgur.com/tulFBtU.png)
+![](https://i.imgur.com/tulFBtU.png)
 
 ## Getting Started
 
